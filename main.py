@@ -2,9 +2,12 @@ import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QLineEdit, QMessageBox, QVBoxLayout, QHBoxLayout, QDialog
 from PyQt5.QtGui import QFont, QPixmap
 from PyQt5.QtCore import Qt
-from db import check_login_User, check_login_Staff, register_new_user
+from db import check_login_User, check_login_Staff, register_new_user, register_new_car, delete_car
 
 class MyWindow(QWidget):
+    
+    current_user = None
+    
     def __init__(self):
         super().__init__()
 
@@ -54,10 +57,13 @@ class MyWindow(QWidget):
 
         if check_login_User(id_text, pw_text):
             QMessageBox.information(self, "로그인 성공", "User 로그인 성공!")
+            MyWindow.current_user = {'id': id_text, 'role': 'user'}
+            print(self.current_user)
             self.hide()
             self.show_user_window()
         elif check_login_Staff(id_text, pw_text):
-            QMessageBox.information(self,"로그인 성공", "Staff 로그인 성공!")
+            QMessageBox.information(self, "로그인 성공", "Staff 로그인 성공!")
+            MyWindow.current_user = {'id': id_text, 'role': 'staff'}
             self.hide()
             self.show_staff_window()
         else:
@@ -84,17 +90,21 @@ class MyWindow(QWidget):
 
     
     def show_user_window(self):
+        self.user_window = UserWindow()
         self.user_window.show()
-        
+
     def show_staff_window(self):
+        self.staff_window = StaffWindow()
         self.staff_window.show()
 
 
-
+# 회원가입 window
 class RegistrationWindow(QDialog):
+
+    
     def __init__(self, parent=None):
         super().__init__(parent)
-
+        self.current_user = MyWindow.current_user  
         self.initUI()
 
     def initUI(self):
@@ -152,12 +162,12 @@ class RegistrationWindow(QDialog):
 
         
         
-
+# 사용자 window
 class UserWindow(QWidget):
+    
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.sort_count = {'price': 0, 'distance': 0, 'age': 0}
-
+        self.current_user = MyWindow.current_user  
         self.initUI()
 
     def initUI(self):
@@ -238,9 +248,10 @@ class UserWindow(QWidget):
         
         
 class StaffWindow(QWidget):
+    
     def __init__(self, parent=None):
         super().__init__(parent)
-
+        self.current_user = MyWindow.current_user  
         self.initUI()
 
     def initUI(self):
@@ -263,9 +274,9 @@ class StaffWindow(QWidget):
         delete_button.setFixedSize(button_width, button_height)
         show_button.setFixedSize(button_width, button_height)
 
-        register_button.clicked.connect(lambda: self.button_clicked(register_button))
-        delete_button.clicked.connect(lambda: self.button_clicked(delete_button))
-        show_button.clicked.connect(lambda: self.button_clicked(show_button))
+        register_button.clicked.connect(self.show_registration_car_window)
+        delete_button.clicked.connect(self.show_delete_car_window)
+        show_button.clicked.connect(self.show_show_car_window)
 
         hbox = QHBoxLayout()
         hbox.addWidget(register_button)
@@ -278,9 +289,128 @@ class StaffWindow(QWidget):
         vbox.addStretch(1)
 
         self.setLayout(vbox)
+        
+    def show_registration_car_window(self):
+        registration_car_window = RegistrationCarWindow(self)
+        registration_car_window.exec_()
+        
+    def show_delete_car_window(self):
+        delete_car_window = DeleteCarWindow(self)
+        delete_car_window.exec_()
+    
+    def show_show_car_window(self):
+        delete_car_window = DeleteCarWindow(self)
+        delete_car_window.exec_()
+        
+    
 
-    def button_clicked(self, button):
-        print(f'{button.text()} 버튼이 눌렸습니다.')
+class RegistrationCarWindow(QDialog):
+    
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.current_user = MyWindow.current_user 
+        self.initUI()
+
+    def initUI(self):
+        self.setGeometry(400, 400, 400, 300)
+        self.setWindowTitle('중고차 등록')
+
+        cid_label = QLabel('CID:', self)
+        self.cid_input = QLineEdit(self)
+
+        age_label = QLabel('Age:', self)
+        self.age_input = QLineEdit(self)
+
+        model_label = QLabel('Model:', self)
+        self.model_input = QLineEdit(self)
+
+        distance_label = QLabel('Distance:', self)
+        self.distance_input = QLineEdit(self)
+
+        price_label = QLabel('Price:', self)
+        self.price_input = QLineEdit(self)
+
+        image_label = QLabel('Image:', self)
+        self.image_input = QLineEdit(self)
+
+        register_button = QPushButton('등록', self)
+        register_button.clicked.connect(self.register_button_clicked)
+
+        layout = QVBoxLayout(self)
+        layout.addWidget(cid_label)
+        layout.addWidget(self.cid_input)
+        layout.addWidget(age_label)
+        layout.addWidget(self.age_input)
+        layout.addWidget(model_label)
+        layout.addWidget(self.model_input)
+        layout.addWidget(distance_label)
+        layout.addWidget(self.distance_input)
+        layout.addWidget(price_label)
+        layout.addWidget(self.price_input)
+        layout.addWidget(image_label)
+        layout.addWidget(self.image_input)
+        layout.addWidget(register_button)
+
+    def clear_inputs(self):
+        self.cid_input.clear()
+        self.age_input.clear()
+        self.model_input.clear()
+        self.distance_input.clear()
+        self.price_input.clear()
+        self.image_input.clear()
+
+    def register_button_clicked(self):
+        cid_text = self.cid_input.text()
+        age_text = self.age_input.text()
+        model_text = self.model_input.text()
+        distance_text = self.distance_input.text()
+        price_text = self.price_input.text()
+        image_text = self.image_input.text()
+
+        if register_new_car(cid_text, age_text, model_text,self.current_user['id'], distance_text, price_text, image_text) == True:
+            print(f"CID: {cid_text}, Age: {age_text}, Model: {model_text}, Staff: {self.current_user['id']}, Distance: {distance_text}, Price: {price_text}, Image: {image_text}")
+            self.accept()
+        else:
+            QMessageBox.warning(self, "등록 실패", "차량 등록에 실패했습니다.")
+            self.clear_inputs()
+            self.show()
+
+class DeleteCarWindow(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.initUI()
+
+    def initUI(self):
+        self.setGeometry(400, 400, 400, 150)
+        self.setWindowTitle('중고차 삭제')
+
+        cid_label = QLabel('삭제하실 차량 번호를 입력해주세요:', self)
+        self.cid_input = QLineEdit(self)
+
+        delete_button = QPushButton('삭제', self)
+        delete_button.clicked.connect(self.delete_button_clicked)
+
+        layout = QVBoxLayout(self)
+        layout.addWidget(cid_label)
+        layout.addWidget(self.cid_input)
+        layout.addWidget(delete_button)
+
+    def delete_button_clicked(self):
+        cid_text = self.cid_input.text()
+        confirm_message = f'정말로 차량 번호 {cid_text} 차량을 삭제하시겠습니까?\n(해당 데이터는 영구히 삭제됩니다.)'
+        reply = QMessageBox.question(self, '삭제 확인', confirm_message, QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+
+        if reply == QMessageBox.Yes:
+            if delete_car(cid_text):
+                QMessageBox.information(self, '삭제 완료', '차량이 삭제되었습니다.')
+                
+            else:
+                QMessageBox.warning(self, '삭제 실패', '차량 번호를 다시 확인해주세요.')
+            
+            self.accept()
+            
+        else:
+            self.reject()
 
 
 if __name__ == '__main__':
