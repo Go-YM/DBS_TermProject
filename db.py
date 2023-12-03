@@ -171,3 +171,55 @@ def delete_car(id):
     finally:
         cur.close()
         remote.close()
+        
+def get_car_data():
+    try:
+        remote = mysql.connector.connect(
+            host="192.168.56.101",
+            user="goym",
+            password="your_password",
+            database="TermDB",
+            port=4567
+        )
+
+        cur = remote.cursor(dictionary=True)  # Use dictionary cursor
+
+        # Car 테이블의 모든 데이터를 가져옴
+        cur.execute("SELECT * FROM Car")
+        car_data = cur.fetchall()
+
+        return car_data
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
+
+    finally:
+        cur.close()
+        remote.close()
+        
+def get_staff_name(sid):
+    try:
+        remote = mysql.connector.connect(
+            host="192.168.56.101",
+            user="goym",
+            password="your_password",
+            database="TermDB",
+            port=4567
+        )
+
+        cur = remote.cursor()
+
+        # Staff 테이블에서 sid에 해당하는 staff의 user_name을 가져옴
+        cur.execute("SELECT user_name FROM Staff WHERE sid = %s", (sid,))
+        staff_name = cur.fetchone()
+
+        return staff_name[0] if staff_name else None
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
+
+    finally:
+        cur.close()
+        remote.close()
