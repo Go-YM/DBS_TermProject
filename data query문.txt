@@ -1,205 +1,156 @@
-USE TermDB;
-
--- #1. 2019/올뉴 K3/68,918/1,359/216가4156
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('216가4156', 2019, '올뉴 K3', (SELECT sid FROM Staff WHERE user_name = '고영민'), 68918, 1359, 0, '216가4156.jpg');
+VALUES ('216가4156', 2019, '올뉴 K3', (SELECT sid FROM Staff WHERE user_name = '고영민'), 68918, 1359, '216가4156.jpg');
 
--- #2. 2018/올뉴 크루즈/76,578/1,050/131어3142
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('131어3142', 2018, '올뉴 크루즈', (SELECT sid FROM Staff WHERE user_name = '고영민'), 76578, 1050, 0, '131어3142.jpg');
+VALUES ('131어3142', 2018, '올뉴 크루즈', (SELECT sid FROM Staff WHERE user_name = '고영민'), 76578, 1050, '131어3142.jpg');
 
--- #3. 2019/올뉴 K3/73,849/1,320/330저9201
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('330저9201', 2019, '올뉴 K3', (SELECT sid FROM Staff WHERE user_name = '고영민'), 73849, 1320, 0, '330저9201.jpg');
+VALUES ('330저9201', 2019, '올뉴 K3', (SELECT sid FROM Staff WHERE user_name = '고영민'), 73849, 1320, '330저9201.jpg');
 
--- #4. 2019/더 뉴 아반떼/40,745/1,450/02구1037
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('02구1037', 2019, '더 뉴 아반떼', (SELECT sid FROM Staff WHERE user_name = '고영민'), 40745, 1450, 0, '02구1037.jpg');
+VALUES ('02구1037', 2019, '더 뉴 아반떼', (SELECT sid FROM Staff WHERE user_name = '고영민'), 40745, 1450, '02구1037.jpg');
 
--- #5. 2019/아이오닉 일렉트릭 Q/36,862/1,950/04무8107
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('04무8107', 2019, '아이오닉 일렉트릭 Q', (SELECT sid FROM Staff WHERE user_name = '고영민'), 36862, 1950, 0, '04무8107.jpg');
+VALUES ('04무8107', 2019, '아이오닉 일렉트릭 Q', (SELECT sid FROM Staff WHERE user_name = '고영민'), 36862, 1950, '04무8107.jpg');
 
--- #6. 2019/벨로스터/25,000/1,180/01라3164
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('01라3164', 2019, '벨로스터', (SELECT sid FROM Staff WHERE user_name = '고영민'), 25000, 1180, 0, '01라3164.jpg');
+VALUES ('01라3164', 2019, '벨로스터', (SELECT sid FROM Staff WHERE user_name = '고영민'), 25000, 1180, '01라3164.jpg');
 
--- #7. 2018/아반떼 AD/121,636/1,000/43머5671
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('43머5671', 2018, '아반떼 AD', (SELECT sid FROM Staff WHERE user_name = '고영민'), 121636, 1000, 0, '43머5671.jpg');
+VALUES ('43머5671', 2018, '아반떼 AD', (SELECT sid FROM Staff WHERE user_name = '고영민'), 121636, 1000, '43머5671.jpg');
 
--- #8. 2016/아반떼 AD/64,773/1,400/18누0822
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('18누0822', 2016, '아반떼 AD', (SELECT sid FROM Staff WHERE user_name = '고영민'), 64773, 1400, 0, '18누0822.jpg');
+VALUES ('18누0822', 2016, '아반떼 AD', (SELECT sid FROM Staff WHERE user_name = '고영민'), 64773, 1400, '18누0822.jpg');
 
--- #9. 2018/올뉴 K3/74,685/1,400/10소5337
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('10소5337', 2018, '올뉴 K3', (SELECT sid FROM Staff WHERE user_name = '고영민'), 74685, 1400, 0, '10소5337.jpg');
+VALUES ('10소5337', 2018, '올뉴 K3', (SELECT sid FROM Staff WHERE user_name = '고영민'), 74685, 1400, '10소5337.jpg');
 
--- #10. 2016/아이오닉 일렉트릭 N/157,375/1,170/36너4315
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('36너4315', 2016, '아이오닉 일렉트릭 N', (SELECT sid FROM Staff WHERE user_name = '고영민'), 157375, 1170, 0, '36너4315.jpg');
+VALUES ('36너4315', 2016, '아이오닉 일렉트릭 N', (SELECT sid FROM Staff WHERE user_name = '고영민'), 157375, 1170, '36너4315.jpg');
 
--- #11. 2016/아반떼 AD/75,238/1,149/08모0717
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('08모0717', 2016, '아반떼 AD', (SELECT sid FROM Staff WHERE user_name = '고영민'), 75238, 1149, 0, '08모0717.jpg');
+VALUES ('08모0717', 2016, '아반떼 AD', (SELECT sid FROM Staff WHERE user_name = '고영민'), 75238, 1149, '08모0717.jpg');
 
--- #12. 2016/아반떼 AD/79,797/1,150/17두8974
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('17두8974', 2016, '아반떼 AD', (SELECT sid FROM Staff WHERE user_name = '고영민'), 79797, 1150, 0, '17두8974.jpg');
+VALUES ('17두8974', 2016, '아반떼 AD', (SELECT sid FROM Staff WHERE user_name = '고영민'), 79797, 1150, '17두8974.jpg');
 
--- #13. 2019/쏘울/20,681/1,799/36나5979
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('36나5979', 2019, '쏘울', (SELECT sid FROM Staff WHERE user_name = '고영민'), 20681, 1799, 0, '36나5979.jpg');
+VALUES ('36나5979', 2019, '쏘울', (SELECT sid FROM Staff WHERE user_name = '고영민'), 20681, 1799, '36나5979.jpg');
 
--- #14. 2018/아반떼 AD/61,657/1,280/52버2771
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('52버2771', 2018, '아반떼 AD', (SELECT sid FROM Staff WHERE user_name = '고영민'), 61657, 1280, 0, '52버2771.jpg');
+VALUES ('52버2771', 2018, '아반떼 AD', (SELECT sid FROM Staff WHERE user_name = '고영민'), 61657, 1280, '52버2771.jpg');
 
--- #15. 2018/벨로스터/43,300/1,540/11너4805
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('11너4805', 2018, '벨로스터', (SELECT sid FROM Staff WHERE user_name = '고영민'), 43300, 1540, 0, '11너4805.jpg');
+VALUES ('11너4805', 2018, '벨로스터', (SELECT sid FROM Staff WHERE user_name = '고영민'), 43300, 1540, '11너4805.jpg');
 
--- #16. 2021/아반떼 CN7/83,321/1,350/167고3166
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('167고3166', 2021, '아반떼 CN7', (SELECT sid FROM Staff WHERE user_name = '고영민'), 83321, 1350, 0, '167고3166.jpg');
+VALUES ('167고3166', 2021, '아반떼 CN7', (SELECT sid FROM Staff WHERE user_name = '고영민'), 83321, 1350, '167고3166.jpg');
 
--- #17. 2017/쏘울/28,673/1,420/49두8902
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('49두8902', 2017, '쏘울', (SELECT sid FROM Staff WHERE user_name = '고영민'), 28673, 1420, 0, '49두8902.jpg');
+VALUES ('49두8902', 2017, '쏘울', (SELECT sid FROM Staff WHERE user_name = '고영민'), 28673, 1420, '49두8902.jpg');
 
--- #18. 2019/벨로스터/63,897/1,750/244노1853
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('244노1853', 2019, '벨로스터', (SELECT sid FROM Staff WHERE user_name = '고영민'), 63897, 1750, 0, '244노1853.jpg');
+VALUES ('244노1853', 2019, '벨로스터', (SELECT sid FROM Staff WHERE user_name = '고영민'), 63897, 1750, '244노1853.jpg');
 
--- #19. 2016/아반떼 AD/72,705/1,230/59고0416
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('59고0416', 2016, '아반떼 AD', (SELECT sid FROM Staff WHERE user_name = '고영민'), 72705, 1230, 0, '59고0416.jpg');
+VALUES ('59고0416', 2016, '아반떼 AD', (SELECT sid FROM Staff WHERE user_name = '고영민'), 72705, 1230, '59고0416.jpg');
 
--- #20. 2019/올뉴 K3/103,871/1,400/22자1729
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('22자1729', 2019, '올뉴 K3', (SELECT sid FROM Staff WHERE user_name = '고영민'), 103871, 1400, 0, '22자1729.jpg');
+VALUES ('286러3592', 2019, '올뉴 K3', (SELECT sid FROM Staff WHERE user_name = '고영민'), 103871, 1400, '286러3592.jpg');
 
--- #21. 2018/쏘렌토/55,249/2,100/22누3867
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('22누3867', 2018, '쏘렌토', (SELECT sid FROM Staff WHERE user_name = '고영민'), 55249, 2100, 0, '22누3867.jpg');
+VALUES ('190수5767', 2020, '더뉴 그랜저', (SELECT sid FROM Staff WHERE user_name = '고영민'), 58798, 2450, '190수5767.jpg');
 
--- #22. 2018/제네시스 G80/45,831/2,500/76라3183
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('76라3183', 2018, '제네시스 G80', (SELECT sid FROM Staff WHERE user_name = '고영민'), 45831, 2500, 0, '76라3183.jpg');
+VALUES ('19구3627', 2019, '그랜저 IG', (SELECT sid FROM Staff WHERE user_name = '고영민'), 56578, 2550, '19구3627.jpg');
 
--- #23. 2021/아이오닉 5/17,392/2,800/33소9594
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('33소9594', 2021, '아이오닉 5', (SELECT sid FROM Staff WHERE user_name = '고영민'), 17392, 2800, 0, '33소9594.jpg');
+VALUES ('65부0989', 2015, '그랜저 HG', (SELECT sid FROM Staff WHERE user_name = '고영민'), 70934, 1550, '65부0989.jpg');
 
--- #24. 2019/쏘렌토/65,210/2,250/62어7908
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('62어7908', 2019, '쏘렌토', (SELECT sid FROM Staff WHERE user_name = '고영민'), 65210, 2250, 0, '62어7908.jpg');
+VALUES ('300다7317', 2021, '더뉴 그랜저', (SELECT sid FROM Staff WHERE user_name = '고영민'), 45437, 3450, '300다7317.jpg');
 
--- #25. 2019/그랜저 IG/29,482/2,900/30무2911
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('30무2911', 2019, '그랜저 IG', (SELECT sid FROM Staff WHERE user_name = '고영민'), 29482, 2900, 0, '30무2911.jpg');
+VALUES ('35조3859', 2011, '그랜저 HG', (SELECT sid FROM Staff WHERE user_name = '고영민'), 161965, 580, '35조3859.jpg');
 
--- #26. 2017/쏘나타/58,493/1,980/27너0735
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('27너0735', 2017, '쏘나타', (SELECT sid FROM Staff WHERE user_name = '고영민'), 58493, 1980, 0, '27너0735.jpg');
+VALUES ('64조8889', 2011, '아반떼 MD', (SELECT sid FROM Staff WHERE user_name = '고영민'), 157104, 590, '64조8889.jpg');
 
--- #27. 2018/아반떼 AD/82,649/1,650/44부2798
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('44부2798', 2018, '아반떼 AD', (SELECT sid FROM Staff WHERE user_name = '고영민'), 82649, 1650, 0, '44부2798.jpg');
+VALUES ('24러5776', 2010, '아반떼 HD', (SELECT sid FROM Staff WHERE user_name = '고영민'), 52579, 390, '24러5776.jpg');
 
--- #28. 2017/그랜저 IG/79,461/2,300/12마4244
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('12마4244', 2017, '그랜저 IG', (SELECT sid FROM Staff WHERE user_name = '고영민'), 79461, 2300, 0, '12마4244.jpg');
+VALUES ('34노7780', 2010, '아반떼 HD', (SELECT sid FROM Staff WHERE user_name = '고영민'), 1203661, 415, '34노7780.jpg');
 
--- #29. 2019/아이오닉 하이브리드/53,811/1,450/07두0256
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('07두0256', 2019, '아이오닉 하이브리드', (SELECT sid FROM Staff WHERE user_name = '고영민'), 53811, 1450, 0, '07두0256.jpg');
+VALUES ('01주5031', 2014, 'K3', (SELECT sid FROM Staff WHERE user_name = '고영민'), 158444, 450, '01주5031.jpg');
 
--- #30. 2017/쏘렌토/92,410/1,950/81로1501
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('81로1501', 2017, '쏘렌토', (SELECT sid FROM Staff WHERE user_name = '고영민'), 92410, 1950, 0, '81로1501.jpg');
+VALUES ('09너4085', 2014, 'K3', (SELECT sid FROM Staff WHERE user_name = '고영민'), 195913, 450, '09너4085.jpg');
 
--- #31. 2017/쏘나타/37,026/1,830/08너3801
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('08너3801', 2017, '쏘나타', (SELECT sid FROM Staff WHERE user_name = '고영민'), 37026, 1830, 0, '08너3801.jpg');
+VALUES ('33아8889', 2017, '벤츠 s', (SELECT sid FROM Staff WHERE user_name = '고영민'), 89028, 7990, '33아8889.jpg');
 
--- #32. 2018/그랜저 IG/40,915/2,550/91마3015
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('91마3015', 2018, '그랜저 IG', (SELECT sid FROM Staff WHERE user_name = '고영민'), 40915, 2550, 0, '91마3015.jpg');
+VALUES ('50노8360', 2016, '디스커버리', (SELECT sid FROM Staff WHERE user_name = '고영민'), 94790, 3170, '50노8360.jpg');
 
--- #33. 2016/아반떼 AD/85,237/1,100/04마1023
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('04마1023', 2016, '아반떼 AD', (SELECT sid FROM Staff WHERE user_name = '고영민'), 85237, 1100, 0, '04마1023.jpg');
+VALUES ('41버1146', 2018, '테슬라 s', (SELECT sid FROM Staff WHERE user_name = '고영민'), 146672, 4100, '41버1146.jpg');
 
--- #34. 2017/쏘나타/51,690/1,920/82가2875
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('82가2875', 2017, '쏘나타', (SELECT sid FROM Staff WHERE user_name = '고영민'), 51690,
+VALUES ('253러2798', 2022, '벤츠 s', (SELECT sid FROM Staff WHERE user_name = '고영민'), 16089, 12500, '253러2798.jpg');
 
--- #35. /2018/더뉴 k5/61,851/1,530/198더1619
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('198더1619', 2018, '더뉴 k5',  (SELECT sid FROM Staff WHERE user_name = '고영민'), 61851, 1530, 0, '198더1619.jpg');
+VALUES ('130우9450', 2018, '더뉴 k5', (SELECT sid FROM Staff WHERE user_name = '고영민'), 37619, 1690, '130우9450.jpg');
 
--- #35. 2019/벨로스터/29,874/1,570/78두4711
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('78두4711', 2019, '벨로스터', (SELECT sid FROM Staff WHERE user_name = '최동진'), 29874, 1570, 0, '78두4711.jpg');
+VALUES ('198더1619', 2018, '더뉴 k5', (SELECT sid FROM Staff WHERE user_name = '고영민'), 61851, 1530, '198더1619.jpg');
 
--- #36. 2020/쏘렌토/41,583/2,200/95마5423
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('95마5423', 2020, '쏘렌토', (SELECT sid FROM Staff WHERE user_name = '최동진'), 41583, 2200, 0, '95마5423.jpg');
+VALUES ('176두2292', 2018, '더뉴 k5', (SELECT sid FROM Staff WHERE user_name = '고영민'), 91893, 1470, '176두2292.jpg');
 
--- #37. 2017/아이오닉 하이브리드/37,198/1,380/77고2837
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('77고2837', 2017, '아이오닉 하이브리드', (SELECT sid FROM Staff WHERE user_name = '최동진'), 37198, 1380, 0, '77고2837.jpg');
+VALUES ('54나1831', 2018, '더뉴 K5', (SELECT sid FROM Staff WHERE user_name = '고영민'), 85544, 1299, '54나1831.jpg');
 
--- #38. 2018/쏘울/49,502/1,860/14가6281
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('14가6281', 2018, '쏘울', (SELECT sid FROM Staff WHERE user_name = '최동진'), 49502, 1860, 0, '14가6281.jpg');
+VALUES ('33모4773', 2003, '아반떼 XD', (SELECT sid FROM Staff WHERE user_name = '고영민'), 120036, 190, '33모4773.jpg');
 
--- #39. 2020/쏘나타/18,746/2,300/54두4092
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('54두4092', 2020, '쏘나타', (SELECT sid FROM Staff WHERE user_name = '최동진'), 18746, 2300, 0, '54두4092.jpg');
+VALUES ('61우6715', 2008, '아반뗴 HD', (SELECT sid FROM Staff WHERE user_name = '고영민'), 77625, 460, '61우6715.jpg');
 
--- #40. 2019/쏘렌토/62,091/2,100/29소1658
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('29소1658', 2019, '쏘렌토', (SELECT sid FROM Staff WHERE user_name = '최동진'), 62091, 2100, 0, '29소1658.jpg');
+VALUES ('53오1566', 2017, 'bmw 520d', (SELECT sid FROM Staff WHERE user_name = '고영민'), 131408, 2750, '53오1566.jpg');
 
--- #41. 2020/아반떼 AD/34,580/1,600/78두8734
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('78두8734', 2020, '아반떼 AD', (SELECT sid FROM Staff WHERE user_name = '최동진'), 34580, 1600, 0, '78두8734.jpg');
+VALUES ('172수6611', 2022, '벤츠 e 카브리올레', (SELECT sid FROM Staff WHERE user_name = '고영민'), 18217, 8500, '172수6611.jpg');
 
--- #42. 2017/그랜저 IG/53,942/2,480/95나1267
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('95나1267', 2017, '그랜저 IG', (SELECT sid FROM Staff WHERE user_name = '최동진'), 53942, 2480, 0, '95나1267.jpg');
+VALUES ('391마9724', 2020, 'bmw 520i', (SELECT sid FROM Staff WHERE user_name = '고영민'), 38680, 4699, '391마9724.jpg');
 
--- #43. 2018/쏘렌토/48,710/2,150/59로3821
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('59로3821', 2018, '쏘렌토', (SELECT sid FROM Staff WHERE user_name = '최동진'), 48710, 2150, 0, '59로3821.jpg');
+VALUES ('108도7298', 2021, '벤츠 e', (SELECT sid FROM Staff WHERE user_name = '고영민'), 48312, 4850, '108도7298.jpg');
 
--- #44. 2016/아이오닉 하이브리드/81,049/1,300/32가7138
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('32가7138', 2016, '아이오닉 하이브리드', (SELECT sid FROM Staff WHERE user_name = '최동진'), 81049, 1300, 0, '32가7138.jpg');
+VALUES ('17너5284', 2018, '포르쉐 카이맨', (SELECT sid FROM Staff WHERE user_name = '고영민'), 36149, 7250, '17너5284.jpg');
 
--- #45. 2021/벨로스터 N/15,320/2,100/05로5492
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('05로5492', 2021, '벨로스터 N', (SELECT sid FROM Staff WHERE user_name = '최동진'), 15320, 2100, 0, '05로5492.jpg');
+VALUES ('257구2199', 2020, '포드 익스플로러', (SELECT sid FROM Staff WHERE user_name = '고영민'), 58230, 3720, '257구2199.jpg');
 
--- #46. 2019/쏘나타/42,184/1,920/13마4621
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('13마4621', 2019, '쏘나타', (SELECT sid FROM Staff WHERE user_name = '최동진'), 42184, 1920, 0, '13마4621.jpg');
+VALUES ('21소0446', 2016, '벤츠 e 아방가르드', (SELECT sid FROM Staff WHERE user_name = '고영민'), 105755, 2550, '21소0446.jpg');
 
--- #47. 2016/그랜저 IG/75,829/2,400/79로2853
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('79로2853', 2016, '그랜저 IG', (SELECT sid FROM Staff WHERE user_name = '최동진'), 75829, 2400, 0, '79로2853.jpg');
+VALUES ('10부6455', 2017, '미니 쿠퍼', (SELECT sid FROM Staff WHERE user_name = '고영민'), 19721, 2100, '10부6455.jpg');
 
--- #48. 2020/아이오닉 5/27,615/2,800/17라5397
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('17라5397', 2020, '아이오닉 5', (SELECT sid FROM Staff WHERE user_name = '최동진'), 27615, 2800, 0, '17라5397.jpg');
+VALUES ('238나3033', 2021, '아우디 A6', (SELECT sid FROM Staff WHERE user_name = '고영민'), 55130, 4250, '238나3033.jpg');
 
--- #49. 2018/쏘렌토/38,905/2,050/63너7412
 INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('63너7412', 2018, '쏘렌토', (SELECT sid FROM Staff WHERE user_name = '최동진'), 38905, 2050, 0, '63너7412.jpg');
+VALUES ('353구5445', 2019, 'bmw 530i', (SELECT sid FROM Staff WHERE user_name = '고영민'), 91741, 3350, '353구5445.jpg');
 
--- #50. 2017/벨로스터/55,220/1,690/27다0492
-INSERT INTO Car (cid, age, model, seller, distance, price, count, image)
-VALUES ('27다0492', 2017, '벨로스터', (SELECT sid FROM Staff WHERE user_name = '최동진'), 55220, 1690, 0, '27다0492.jpg');
+
+
+
+
+
+
