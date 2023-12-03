@@ -2,7 +2,9 @@ import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QLineEdit, QMessageBox, QVBoxLayout, QHBoxLayout, QDialog
 from PyQt5.QtGui import QFont, QPixmap
 from PyQt5.QtCore import Qt
-from db import check_login_User, check_login_Staff, register_new_user, register_new_car, delete_car
+from db import check_login_User, check_login_Staff, register_new_user, register_new_car, delete_car, get_car_data, get_staff_name
+
+# sort_distance, sort_age, sort_price
 
 class MyWindow(QWidget):
     
@@ -164,12 +166,13 @@ class RegistrationWindow(QDialog):
         
 # 사용자 window
 class UserWindow(QWidget):
-    
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.current_user = MyWindow.current_user  
+        self.current_user = MyWindow.current_user
+        self.sort_count = {'price': 0, 'distance': 0, 'age': 0}
+        self.current_data_index = 0  # 현재 데이터의 인덱스
         self.initUI()
-
+        
     def initUI(self):
         self.setGeometry(300, 300, 800, 600)
         self.setWindowTitle('DBS: Term Project - User Window')
@@ -180,17 +183,25 @@ class UserWindow(QWidget):
         self.banner_label.setAlignment(Qt.AlignCenter)
         self.banner_label.setFont(QFont('Arial', 20))
         self.banner_label.setText("중고차 매매 시스템 - User")
+        
+        self.car_data = get_car_data()
+        
+        self.image_label = QLabel(self)
+        self.model_label = QLabel(self)
+        self.sid_label = QLabel(self)
+        self.price_label = QLabel(self)
+        self.age_label = QLabel(self)
+        self.distance_label = QLabel(self)
 
-        image_path = 'C:\\Users\\user\\Desktop\\DBS_TermProject\\Database 생성\\image\\01라3164'  # 추후 db리스트로 불러오기
-        image_label = QLabel(self)
-        pixmap = QPixmap(image_path)
-        scaled_pixmap = pixmap.scaled(400, 300, Qt.KeepAspectRatio) 
-        image_label.setPixmap(scaled_pixmap)
-        image_label.setGeometry(20, 100, 400, 300)
-
+        self.display_current_data()
+        
         reserve_button = QPushButton('예약하기', self)
-        reserve_button.setGeometry(350, 550, 100, 30)
+        reserve_button.setGeometry(250, 500, 100, 30)
         reserve_button.clicked.connect(self.reserve_button_clicked)
+        
+        search_button = QPushButton('조회하기', self)
+        search_button.setGeometry(450, 500, 100, 30)
+        search_button.clicked.connect(self.search_button_clicked)
 
         price_sort_button = QPushButton('가격순 정렬', self)
         distance_sort_button = QPushButton('주행거리순 정렬', self)
@@ -216,6 +227,56 @@ class UserWindow(QWidget):
 
         left_arrow_button.setGeometry(0, 60, arrow_button_width, button_height)
         right_arrow_button.setGeometry(770, 60, arrow_button_width, button_height)
+        
+    def display_current_data(self):
+        current_car = self.car_data[self.current_data_index]
+
+        image_path = 'C://Users//user//Desktop//DBS_TermProject//Database 생성//image//' + current_car['image']
+        pixmap = QPixmap(image_path)
+
+        if pixmap.isNull():
+            print(f"이미지를 로드할 수 없습니다. 경로: {image_path}")
+        else:
+            scaled_pixmap = pixmap.scaled(400, 300, Qt.KeepAspectRatio)
+            self.image_label.setPixmap(scaled_pixmap)
+            self.image_label.setGeometry(20, 100, 400, 300)
+                
+        seller_name = current_car['seller']
+        staff_name = get_staff_name(seller_name)
+
+        self.model_label.setText('차량 : ' + current_car['model'])
+        if staff_name:
+            self.sid_label.setText('판매자 : ' + staff_name + ' 딜러')
+        else:
+            self.sid_label.setText('판매자 : ' + seller_name + ' 딜러')
+        self.price_label.setText('가격 : ' + str(current_car['price']) + ' 만원')
+        self.age_label.setText(str(current_car['age']) + '년식')
+        self.distance_label.setText(str(current_car['distance']) + 'km')
+
+
+        font = QFont('고딕')
+        font.setPointSize(18)  
+        self.model_label.setFont(font)
+        self.model_label.setAlignment(Qt.AlignCenter) 
+        self.model_label.setGeometry(450, 120, 310, 60)
+        
+        self.sid_label.setFont(font)
+        self.sid_label.setAlignment(Qt.AlignCenter) 
+        self.sid_label.setGeometry(450, 200, 310, 60)
+        
+        self.price_label.setFont(font)
+        self.price_label.setAlignment(Qt.AlignCenter) 
+        self.price_label.setGeometry(450, 280, 310, 60)
+        
+        self.age_label.setFont(font)
+        self.age_label.setAlignment(Qt.AlignCenter) 
+        self.age_label.setGeometry(450, 345, 155, 60)
+        
+        self.distance_label.setFont(font)
+        self.distance_label.setAlignment(Qt.AlignCenter) 
+        self.distance_label.setGeometry(605, 345, 155, 60)
+
+
 
     def price_sort_clicked(self):
         self.sort_clicked('price')
@@ -235,13 +296,24 @@ class UserWindow(QWidget):
             print(f'{category}을(를) 오름차순으로 정렬합니다.')
 
     def left_arrow_clicked(self):
-        print('왼쪽 화살표 버튼이 클릭되었습니다.')
+        if self.current_data_index > 0:
+            self.current_data_index -= 1
+            self.display_current_data()
+        else:
+            print('더 이상 이전 데이터가 없습니다.')
 
     def right_arrow_clicked(self):
-        print('오른쪽 화살표 버튼이 클릭되었습니다.')
+        if self.current_data_index < len(self.car_data) - 1:
+            self.current_data_index += 1
+            self.display_current_data()
+        else:
+            print('더 이상 다음 데이터가 없습니다.')
 
     def reserve_button_clicked(self):
         print('예약하기 버튼이 클릭되었습니다.')
+        
+    def search_button_clicked(self):
+        print('조회하기 버튼이 클릭되었습니다.')
 
         
         
