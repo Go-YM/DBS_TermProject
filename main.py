@@ -2,9 +2,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QLineEdit, QMessageBox, QVBoxLayout, QHBoxLayout, QDialog
 from PyQt5.QtGui import QFont, QPixmap
 from PyQt5.QtCore import Qt
-from db import check_login_User, check_login_Staff, register_new_user, register_new_car, delete_car, get_car_data, get_staff_name
-
-# sort_distance, sort_age, sort_price
+from db import check_login_User, check_login_Staff, register_new_user, register_new_car, delete_car, get_car_data, get_staff_name, check_accident, reserve_car, show_reserver
 
 class MyWindow(QWidget):
     
@@ -16,7 +14,7 @@ class MyWindow(QWidget):
         self.initUI()
 
     def initUI(self):
-        self.setGeometry(300, 300, 800, 600)
+        self.setGeometry(800, 300, 800, 600)
         self.setWindowTitle('DBS: Term Project')
 
         self.banner_label = QLabel(self)
@@ -110,7 +108,7 @@ class RegistrationWindow(QDialog):
         self.initUI()
 
     def initUI(self):
-        self.setGeometry(400, 400, 400, 300)
+        self.setGeometry(900, 400, 400, 300)
         self.setWindowTitle('회원가입')
 
         id_label = QLabel('ID:', self)
@@ -174,7 +172,7 @@ class UserWindow(QWidget):
         self.initUI()
         
     def initUI(self):
-        self.setGeometry(300, 300, 800, 600)
+        self.setGeometry(800, 300, 800, 600)
         self.setWindowTitle('DBS: Term Project - User Window')
 
         self.banner_label = QLabel(self)
@@ -203,30 +201,19 @@ class UserWindow(QWidget):
         search_button.setGeometry(450, 500, 100, 30)
         search_button.clicked.connect(self.search_button_clicked)
 
-        price_sort_button = QPushButton('가격순 정렬', self)
-        distance_sort_button = QPushButton('주행거리순 정렬', self)
-        age_sort_button = QPushButton('연식순 정렬', self)
-
         left_arrow_button = QPushButton('←', self)
         right_arrow_button = QPushButton('→', self)
 
         button_width = 240
         button_height = 20
-        arrow_button_width = 30
+        arrow_button_width = 50
 
-        price_sort_button.clicked.connect(self.price_sort_clicked)
-        distance_sort_button.clicked.connect(self.distance_sort_clicked)
-        age_sort_button.clicked.connect(self.age_sort_clicked)
 
         left_arrow_button.clicked.connect(self.left_arrow_clicked)
         right_arrow_button.clicked.connect(self.right_arrow_clicked)
 
-        price_sort_button.setGeometry(40, 60, button_width, button_height)
-        distance_sort_button.setGeometry(280, 60, button_width, button_height)
-        age_sort_button.setGeometry(520, 60, button_width, button_height)
-
         left_arrow_button.setGeometry(0, 60, arrow_button_width, button_height)
-        right_arrow_button.setGeometry(770, 60, arrow_button_width, button_height)
+        right_arrow_button.setGeometry(750, 60, arrow_button_width, button_height)
         
     def display_current_data(self):
         current_car = self.car_data[self.current_data_index]
@@ -276,45 +263,48 @@ class UserWindow(QWidget):
         self.distance_label.setAlignment(Qt.AlignCenter) 
         self.distance_label.setGeometry(605, 345, 155, 60)
 
-
-
-    def price_sort_clicked(self):
-        self.sort_clicked('price')
-
-    def distance_sort_clicked(self):
-        self.sort_clicked('distance')
-
-    def age_sort_clicked(self):
-        self.sort_clicked('age')
-
-    def sort_clicked(self, category):
-        self.sort_count[category] += 1
-
-        if self.sort_count[category] % 2 == 1:
-            print(f'{category}을(를) 내림차순으로 정렬합니다.')
-        else:
-            print(f'{category}을(를) 오름차순으로 정렬합니다.')
-
     def left_arrow_clicked(self):
         if self.current_data_index > 0:
             self.current_data_index -= 1
             self.display_current_data()
         else:
-            print('더 이상 이전 데이터가 없습니다.')
+            msg_box = QMessageBox()
+            msg_box.setText("더 이상 이전 데이터가 없습니다.")
+            msg_box.exec_()
 
     def right_arrow_clicked(self):
         if self.current_data_index < len(self.car_data) - 1:
             self.current_data_index += 1
             self.display_current_data()
         else:
-            print('더 이상 다음 데이터가 없습니다.')
+            msg_box = QMessageBox()
+            msg_box.setText("더 이상 다음 데이터가 없습니다.")
+            msg_box.exec_()
 
     def reserve_button_clicked(self):
-        print('예약하기 버튼이 클릭되었습니다.')
-        
-    def search_button_clicked(self):
-        print('조회하기 버튼이 클릭되었습니다.')
+        msg_box = QMessageBox()
+        msg_box.setText("예약이 완료되었습니다.")
+        current_car = self.car_data[self.current_data_index]
+        cid_to_reserve = current_car['cid'] 
+        reserve_car(cid_to_reserve,self.current_user['id'])
+        msg_box.exec_()
 
+    def search_button_clicked(self):
+        current_car = self.car_data[self.current_data_index]
+        cid_to_check = current_car['cid'] 
+
+        result = check_accident(cid_to_check)
+
+        msg_box = QMessageBox()
+
+        if not result:
+            msg_box.setText("무사고 차량입니다.")
+        else:
+            accident_info = "\n".join([f"사고 번호: {accident['anum']}, 사고 일자: {accident['adate']}" for accident in result[1]])
+            msg_box.setText(f"해당 차량은 사고가 있습니다. \n{accident_info}")
+
+
+        msg_box.exec_()
         
         
         
@@ -327,7 +317,7 @@ class StaffWindow(QWidget):
         self.initUI()
 
     def initUI(self):
-        self.setGeometry(300, 300, 800, 600)
+        self.setGeometry(800, 300, 800, 600)
         self.setWindowTitle('DBS: Term Project - Staff Window')
 
         self.banner_label = QLabel(self)
@@ -371,8 +361,17 @@ class StaffWindow(QWidget):
         delete_car_window.exec_()
     
     def show_show_car_window(self):
-        delete_car_window = DeleteCarWindow(self)
-        delete_car_window.exec_()
+        result = show_reserver(self.current_user['id'])
+
+        msg_box = QMessageBox()
+
+        if not result:
+            msg_box.setText("예약이 없습니다.")
+        else:
+            reservation_info = "\n".join([f"예약자 아이디: {info['uid']}, 예약자 이름: {info['user_name']}, 예약자 연락처: {info['email']}, 차량 번호: {info['cid']}, 차량 모델: {info['model']}" for info in result])
+            msg_box.setText(f"예약 정보입니다. \n{reservation_info}")
+
+        msg_box.exec_()
         
     
 
@@ -384,7 +383,7 @@ class RegistrationCarWindow(QDialog):
         self.initUI()
 
     def initUI(self):
-        self.setGeometry(400, 400, 400, 300)
+        self.setGeometry(900, 400, 400, 300)
         self.setWindowTitle('중고차 등록')
 
         cid_label = QLabel('CID:', self)
@@ -453,7 +452,7 @@ class DeleteCarWindow(QDialog):
         self.initUI()
 
     def initUI(self):
-        self.setGeometry(400, 400, 400, 150)
+        self.setGeometry(900, 400, 400, 150)
         self.setWindowTitle('중고차 삭제')
 
         cid_label = QLabel('삭제하실 차량 번호를 입력해주세요:', self)
