@@ -126,7 +126,8 @@ def register_new_car(id, age, model, seller, distance, price, image):
         if existing_user:
             return False
         else:
-            insert_query = f"INSERT INTO Car (cid, age, model, seller, distance, price, image) VALUES ('{id}', '{age}', '{model}', '{seller}', '{distance}', '{price}', '{image}')"
+            insert_query = f"INSERT INTO Car (cid, age, model, seller, distance, price, image) 
+                             VALUES ('{id}', '{age}', '{model}', '{seller}', '{distance}', '{price}', '{image}')"
             cur.execute(insert_query)
             remote.commit()
             return True
