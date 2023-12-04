@@ -1,31 +1,5 @@
 import mysql.connector
 
-# remote = mysql.connector.connect(
-#     host="192.168.56.101",  
-#     user="goym",  
-#     password="your_password",
-#     database="TermDB", 
-#     port=4567  
-# )
-
-# cur = remote.cursor()
-
-# while True:
-#     command = input("Enter Query")
-    
-#     try:
-#         cur.execute(command)
-#         result = cur.fetchall()
-        
-#         for row in result:
-#             print(row)
-            
-#     except KeyboardInterrupt:
-#         print("Exiting...")
-#         break
-
-# remote.close()
-
 def check_login_User(id, pw):
     try:
         remote = mysql.connector.connect(
@@ -184,9 +158,8 @@ def get_car_data():
             port=4567
         )
 
-        cur = remote.cursor(dictionary=True)  # Use dictionary cursor
+        cur = remote.cursor(dictionary=True)
 
-        # Car 테이블의 모든 데이터를 가져옴
         cur.execute("SELECT * FROM Car")
         car_data = cur.fetchall()
 
@@ -213,7 +186,6 @@ def get_staff_name(sid):
 
         cur = remote.cursor()
 
-        # Staff 테이블에서 sid에 해당하는 staff의 user_name을 가져옴
         cur.execute("SELECT user_name FROM Staff WHERE sid = %s", (sid,))
         staff_name = cur.fetchone()
 
@@ -239,7 +211,6 @@ def check_accident(cid):
 
         cur = remote.cursor(dictionary=True)
 
-        # 해당 cid의 사고 여부를 확인
         cur.execute("SELECT * FROM Accident WHERE car_id = %s", (cid,))
         accident_data = cur.fetchall()
 
