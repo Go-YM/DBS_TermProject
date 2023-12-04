@@ -197,6 +197,7 @@ def get_car_data():
     finally:
         cur.close()
         remote.close()
+
         
 def get_staff_name(sid):
     try:
@@ -223,3 +224,92 @@ def get_staff_name(sid):
     finally:
         cur.close()
         remote.close()
+
+def check_accident(cid):
+    try:
+        remote = mysql.connector.connect(
+            host="192.168.56.101",
+            user="goym",
+            password="your_password",
+            database="TermDB",
+            port=4567
+        )
+
+        cur = remote.cursor(dictionary=True)
+
+        # 해당 cid의 사고 여부를 확인
+        cur.execute("SELECT * FROM Accident WHERE car_id = %s", (cid,))
+        accident_data = cur.fetchall()
+
+        if not accident_data:
+            return False
+        else:
+            return True, accident_data
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
+
+    finally:
+        cur.close()
+        remote.close()
+        
+def reserve_car(cid, uid):
+    try:
+        remote = mysql.connector.connect(
+            host="192.168.56.101",
+            user="goym",
+            password="your_password",
+            database="TermDB",
+            port=4567
+        )
+
+        cur = remote.cursor(dictionary=True)
+
+        cur.execute("UPDATE Car SET buyer = %s WHERE cid = %s", (uid, cid))
+        remote.commit()
+
+        return True  
+    
+    except Exception as e:
+        print(f"Error: {e}")
+        return False 
+
+    finally:
+        cur.close()
+        remote.close()
+
+import mysql.connector
+
+def show_reserver(sid):
+    try:
+        remote = mysql.connector.connect(
+            host="192.168.56.101",
+            user="goym",
+            password="your_password",
+            database="TermDB",
+            port=4567
+        )
+
+        cur = remote.cursor(dictionary=True)
+
+        # Staff의 sid와 일치하는 판매자가 Car 테이블에 있는 경우, 해당 판매자가 판매한 차량 중 buyer가 비어있지 않은 경우를 확인하여 해당 buyer의 정보와 Car 정보를 반환
+        cur.execute("""
+            SELECT U.uid, U.user_name, U.email, C.cid, C.model
+            FROM Car C
+            JOIN User U ON C.buyer = U.uid
+            WHERE C.seller = %s AND C.buyer IS NOT NULL
+        """, (sid,))
+        
+        reservations = cur.fetchall()
+
+        return reservations
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
+
+    finally:
+        cur.close()
+        remote.close()
+
