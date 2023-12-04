@@ -93,7 +93,8 @@ def register_new_user(id, pw, email, name):
         if existing_user:
             return False
         else:
-            insert_query = f"INSERT INTO User (uid, pw, email, user_name) VALUES ('{id}', '{pw}', '{email}', '{name}')"
+            insert_query = f"INSERT INTO User (uid, pw, email, user_name)
+                             VALUES ('{id}', '{pw}', '{email}', '{name}')"
             cur.execute(insert_query)
             remote.commit()
             return True
