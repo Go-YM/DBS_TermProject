@@ -168,7 +168,7 @@ class UserWindow(QWidget):
         super().__init__(parent)
         self.current_user = MyWindow.current_user
         self.sort_count = {'price': 0, 'distance': 0, 'age': 0}
-        self.current_data_index = 0  # 현재 데이터의 인덱스
+        self.current_data_index = 0
         self.initUI()
         
     def initUI(self):
